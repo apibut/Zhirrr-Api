@@ -140,14 +140,14 @@ loghandler = {
 
 var len = 15
         var arr = '123456789abcdefghijklmnopqrstuvwxyz'
-        var random = '';
+        var random = 'tbot';
 
         for (var i = len; i > 0; i--) {
             random += arr[Math.floor(Math.random() * arr.length)];
         }
 
         var lenn = 5
-        var randomlagi = '';
+        var randomlagi = 'tbot';
 
         for (var i = lenn; i > 0; i--) {
             randomlagi += arr[Math.floor(Math.random() * arr.length)];
