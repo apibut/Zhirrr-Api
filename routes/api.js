@@ -1882,10 +1882,10 @@ router.get('/kuis/tebakgambar', async (req, res, next) => {
 })
 })
 
-router.get('/ytplay', async (req, res, next) => {
+router.get('/ytplay', async function (req, res, next) {
   var apikeyInput = req.query.apikey,
         text = req.query.judul
-   	const ngulik = await nyari(text)
+   const ngulik = await nyari(text)
 
 	if(!apikeyInput) return res.json(loghandler.notparam)
 	if(apikeyInput != 'tbot') return res.json(loghandler.invalidKey)	 
