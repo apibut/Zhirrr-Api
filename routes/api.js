@@ -1882,4 +1882,84 @@ router.get('/kuis/tebakgambar', async (req, res, next) => {
 })
 
 
+var nyari = require('./lib/play')
+app.use('/ytplay', async function (req, res) {
+  var apikeyInput = req.query.apikey,
+        url = req.query.play
+
+	if(!apikeyInput) return res.json(loghandler.notparam)
+	if(apikeyInput != 'fzntea') return res.json(loghandler.invalidKey)
+     if (!url) return res.json(loghandler.noturl)
+	const ngulik = await nyari(url)	 
+    try {
+    // let UrlYoutube = req.query.url.toString() 
+    //ytdl.getVideoID(req.params.url)
+
+    // let yat = ytdl.getInfo(UrlYoutube)
+    let yat = ytdl.getInfo(`https://www.youtube.com/watch?v=${ ytdl.getVideoID(ngulik.toString()) }`)
+    .then((howly) => {
+
+            
+            let empefor = howly.formats
+            let chose = '360p'
+            let resultMp4 = []
+            let resultMp3 = []
+            
+            for (let i = 0; i < empefor.length; i++) {
+                // const quat = empefor[i].qualityLabel
+                // let selector = quat == '720p' ? '720p' : quat == '480p' ? '480p' : quat == '360p' ? '360p' : '144p' 
+                // console.log(selector)
+                if (empefor[i].container == 'mp4' && empefor[i].hasVideo == true && empefor[i].hasAudio == true) {
+                    // resulting.push(empefor[i].codecs)
+                    // console.log(empefor[i])
+                    let resultga = empefor[i]
+                    resultMp4.push({
+                        quality: resultga.qualityLabel,
+                        url: resultga.url
+                    })
+                }
+
+                if (empefor[i].mimeType == 'audio/webm; codecs=\"opus\"') {
+                    let resultAud = empefor[i]
+                    resultMp3.push({
+                        audioQuality: resultAud.audioQuality,
+                        audioBitrate: resultAud.audioBitrate,
+                        url: resultAud.url
+                    })
+                }
+            }
+
+            const tamnel = howly.videoDetails.thumbnail.thumbnails
+
+            res.send({
+                status: "true",
+                message: "Sukses",
+                title: howly.videoDetails.title,
+                published: howly.videoDetails.publishDate,
+                duration: howly.videoDetails.lengthSeconds.toReal(),
+                desc: howly.videoDetails.description,
+                author: howly.videoDetails.author,
+                thumb: tamnel[tamnel.length - 1],
+                video: resultMp4,
+                audio: resultMp3,
+                // all: howly
+                
+    
+            })
+        
+
+        
+    })
+} catch (e) {
+    res.send({
+        status: "false",
+        message: "Zzz",
+        todo: "Masukan parameter judul!",
+        // result: e
+
+    })
+    console.log(e)
+}
+})
+
 module.exports = router
