@@ -1927,8 +1927,6 @@ router.get('/ytplay', async function (req, res, next) {
                 }
             }
 
-            const tamnel = howly.videoDetails.thumbnail.thumbnails
-
             res.json({
                 status: "true",
                 message: "Sukses",
@@ -1937,16 +1935,11 @@ router.get('/ytplay', async function (req, res, next) {
                 duration: howly.videoDetails.lengthSeconds.toReal(),
                 desc: howly.videoDetails.description,
                 author: howly.videoDetails.author,
-                thumb: tamnel[tamnel.length - 1],
+                thumb: howly.videoDetails.thumbnail.thumbnails[howly.videoDetails.thumbnail.thumbnails.length - 1],
                 video: resultMp4,
                 audio: resultMp3,
-                // all: howly
-                
-    
-            })
-        
-
-        
+                // all: howly   
+            })       
     })
 } catch (e) {
     res.json({
