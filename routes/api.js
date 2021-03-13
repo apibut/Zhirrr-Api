@@ -1888,7 +1888,7 @@ app.use('/ytplay', async function (req, res) {
         url = req.query.play
 
 	if(!apikeyInput) return res.json(loghandler.notparam)
-	if(apikeyInput != 'fzntea') return res.json(loghandler.invalidKey)
+	if(apikeyInput != 'tbot') return res.json(loghandler.invalidKey)
      if (!url) return res.json(loghandler.noturl)
    const ngulik = await nyari(url)	 
     try {
