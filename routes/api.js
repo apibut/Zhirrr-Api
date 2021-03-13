@@ -44,6 +44,12 @@ loghandler = {
         message: 'masukan parameter apikey',
         getApikey: 'gak punya apikey? chat gw aja yaaa di wa.me/6281325714976 , key nya gratis ya su..., jadi santuyy ajaa'
     },
+    notjud: {
+        status: false,
+        creator: `${creator}`,
+        code: 406,
+        message: 'masukan parameter judul'
+    },	
     notkey: {
         status: false,
         creator: `${creator}`,
@@ -1899,6 +1905,7 @@ router.get('/ytplay', async function (req, res, next) {
         text = req.query.judul
 
 	if(!apikeyInput) return res.json(loghandler.notparam)
+	if(!text) return res.json(loghandler.notjud)
 	if(apikeyInput != 'tbot') return res.json(loghandler.invalidKey)
 	const ngulik = await nyari(text)
     try {
