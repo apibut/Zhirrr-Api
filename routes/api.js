@@ -1885,12 +1885,11 @@ router.get('/kuis/tebakgambar', async (req, res, next) => {
 
 router.get('/ytplay', async (req, res, next) => {
   var apikeyInput = req.query.apikey,
-        url = req.query.play
+        judul = req.query.play
+   const ngulik = await nyari(judul)
 
 	if(!apikeyInput) return res.json(loghandler.notparam)
-	if(apikeyInput != 'tbot') return res.json(loghandler.invalidKey)
-     if (!url) return res.json(loghandler.noturl)
-   const ngulik = await nyari(url)	 
+	if(apikeyInput != 'tbot') return res.json(loghandler.invalidKey)	 
     try {
     // let UrlYoutube = req.query.url.toString() 
     //ytdl.getVideoID(req.params.url)
