@@ -1884,7 +1884,7 @@ router.get('/kuis/tebakgambar', async (req, res, next) => {
 
 router.get('/ytplay', async fuction (req, res, next) {
   var apikeyInput = req.query.apikey,
-        const judul = req.query.play
+        text = req.query.judul
    	const ngulik = await nyari(judul)
 
 	if(!apikeyInput) return res.json(loghandler.notparam)
