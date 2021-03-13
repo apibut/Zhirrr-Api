@@ -1883,7 +1883,7 @@ router.get('/kuis/tebakgambar', async (req, res, next) => {
 })
 
 
-app.use('/ytplay', async function (req, res) {
+router.get('/ytplay', async (req, res, next) => {
   var apikeyInput = req.query.apikey,
         url = req.query.play
 
@@ -1958,7 +1958,6 @@ app.use('/ytplay', async function (req, res) {
         // result: e
 
     })
-    console.log(e)
 }
 })
 
